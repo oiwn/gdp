@@ -22,7 +22,7 @@ def _make_types(schema):
 
     cls_dict = {}
     for s_key, s_val in schema.items():
-        if s_val['required'] is True and 'allowed' in s_val:
+        if s_val.get('required', False) is True and 'allowed' in s_val:
             allowed = {str(x).upper(): x for x in s_val['allowed']}
             cls_dict[s_key] = type(s_key, (object, ), allowed)
     return type('ResultTypes', (object, ), cls_dict)
